@@ -1,0 +1,34 @@
+@import 'assets/styles/mixins/colors';
+
+.root {
+  max-width: 330px;
+  width: 100%;
+  margin-bottom: 50px;
+  color: $primary-dark-color;
+}
+
+.image {
+  width: 100%;
+}
+
+.titleAndImageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 15px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.year {
+  padding: 5px 20px;
+  border: 1px solid $tertiary-border;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.genre {
+  font-size: 14px;
+}
