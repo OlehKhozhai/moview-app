@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+import ESLintPlugin from "eslint-webpack-plugin";
 
 module.exports = {
   mode: 'development',
@@ -38,6 +39,9 @@ module.exports = {
           noErrorOnMissing: true,
         },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
     }),
   ],
   resolve: {

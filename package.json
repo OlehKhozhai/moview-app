@@ -6,7 +6,8 @@
     "test": "cd config && jest",
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js --open",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.js --mode production",
-    "webpack": "webpack --mode development"
+    "webpack": "webpack --mode development",
+    "lint": "eslint --ext .ts,.tsx"
   },
   "author": "Oleh Khozhai",
   "license": "ISC",
@@ -30,6 +31,8 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
@@ -41,15 +44,24 @@
     "css-minimizer-webpack-plugin": "^3.0.1",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-webpack-plugin": "^2.5.4",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "html-webpack-plugin": "^5.3.1",
+    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
     "jest-standard-reporter": "^2.0.0",
     "jest-transform-css": "^2.1.0",
+    "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^6.0.0",
+    "prettier": "^2.3.2",
     "react-test-renderer": "^17.0.2",
     "sass-loader": "^12.0.0",
     "style-loader": "^2.0.0",
@@ -72,6 +84,16 @@
       ],
       "@babel/preset-react",
       "@babel/preset-typescript"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.(ts|tsx)": [
+      "npm run --silent lint:fix"
     ]
   }
 }
