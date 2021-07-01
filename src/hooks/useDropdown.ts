@@ -6,14 +6,25 @@ type Props = {
   defaultValue?: string;
 };
 
-const useDropdown = ({ defaultValue }: Props) => {
+const useDropdown = ({
+  defaultValue,
+}: Props): {
+  value: string;
+  onOptionClick: (option: string) => void;
+  isDropdownVisible: boolean;
+  onToggleDropdownVisibility: () => void;
+  onCloseDropdown: () => void;
+} => {
   const [value, setValue] = React.useState(defaultValue || '');
   const { isOpen, onToggle, onClose } = useOpenAndClose({});
 
-  const handleOptionClick = React.useCallback((option: string) => {
-    setValue(option);
-    onClose();
-  }, []);
+  const handleOptionClick = React.useCallback(
+    (option: string) => {
+      setValue(option);
+      onClose();
+    },
+    [onClose]
+  );
 
   return {
     value,

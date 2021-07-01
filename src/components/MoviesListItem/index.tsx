@@ -42,7 +42,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
     if (value === 'delete') {
       onOpenDeleteMovieModal();
     }
-  }, [value]);
+  }, [value, onOpen, onOpenDeleteMovieModal]);
 
   return (
     <>

@@ -47,7 +47,9 @@ const MoviesList: React.FC<MoviesListProps> = ({ className }) => {
   const { hash } = useLocation();
 
   const genreFromUrl = hash.split('#')[1];
-  const filteredMovies = movies.filter(({ genre }) => genre === genreFromUrl || genreFromUrl === 'all');
+  const filteredMovies = movies.filter(
+    ({ genre }) => genre === genreFromUrl || genreFromUrl === 'all'
+  );
 
   return (
     <div className={cn(styles.root, className)}>

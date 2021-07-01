@@ -2,13 +2,23 @@ import React from 'react';
 
 type Props = { onCloseCallback?: () => void };
 
-const useOpenAndClose = ({ onCloseCallback = () => {} }: Props) => {
+const useOpenAndClose = ({
+  onCloseCallback,
+}: Props): {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
+  onToggle: () => void;
+} => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
-    onCloseCallback();
+    if (onCloseCallback) {
+      onCloseCallback();
+    }
+
     setIsOpen(false);
-  }, []);
+  }, [onCloseCallback]);
 
   const handleOpen = React.useCallback(() => {
     setIsOpen(true);
@@ -16,13 +26,13 @@ const useOpenAndClose = ({ onCloseCallback = () => {} }: Props) => {
 
   const handleToggle = React.useCallback(() => {
     setIsOpen((prevState) => {
-      if (!prevState) {
+      if (!prevState && onCloseCallback) {
         onCloseCallback();
       }
 
       return !prevState;
     });
-  }, []);
+  }, [onCloseCallback]);
 
   return {
     isOpen,
