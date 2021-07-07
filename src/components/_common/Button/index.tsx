@@ -6,25 +6,38 @@ import styles from './styles.module.scss';
 
 type ButtonProps = {
   title: string;
+  type?: 'button' | 'submit';
   linkTo?: string;
-  type?: 'primary' | 'primaryOutline' | 'secondary';
+  variation?: 'primary' | 'primaryOutline' | 'secondary';
   children?: ReactNode;
   className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
 };
 
 const Button: React.FC<ButtonProps> = ({
   title,
-  type = 'primary',
+  type = 'button',
+  variation = 'primary',
   linkTo,
   children,
   className,
+  disabled = false,
+  onClick,
 }) => {
   return linkTo ? (
     <Link to={linkTo} className={cn(styles.root, styles[type], className)}>
       {title || children}
     </Link>
   ) : (
-    <button className={cn(styles.root, styles[type], className)}>{title || children}</button>
+    <button
+      className={cn(styles.root, styles[variation], className)}
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {title || children}
+    </button>
   );
 };
 
