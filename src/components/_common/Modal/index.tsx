@@ -34,11 +34,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  if (!modalNode || !isOpen) {
-    return null;
-  }
-
-  return createPortal(component, modalNode);
+  return modalNode && isOpen ? createPortal(component, modalNode) : null;
 };
 
 export default React.memo(Modal);

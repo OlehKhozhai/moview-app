@@ -10,7 +10,7 @@ type DropdownProps = {
   isOpen: boolean;
   value?: string;
   className?: string;
-  onToggle: () => void;
+  onToggle: (e?: React.MouseEvent<HTMLElement>) => void;
   onClose: () => void;
   onOptionClick: (value: string) => void;
 };
@@ -30,15 +30,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div className={cn(styles.root, className)} ref={dropdownRef}>
-      {value ? (
-        <span className={styles.value} onClick={onToggle}>
-          {value}
-        </span>
-      ) : (
-        <span className={styles.threeDots} onClick={onToggle}>
-          ...
-        </span>
-      )}
+      <span className={styles[value ? 'value' : 'threeDots']} onClick={onToggle}>
+        {value || '...'}
+      </span>
+
       {isOpen && (
         <ul className={styles.dropdown}>
           {options.map((option) => {

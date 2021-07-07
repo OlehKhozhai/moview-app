@@ -1,35 +1,27 @@
 import React from 'react';
 import cn from 'classnames';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MoviesNavbarTabItem from 'components/MoviesNavbarTabItem';
+import { tabs } from 'config';
+import { commonSelector } from 'redux/_common/selectors';
+import { setActiveTabAction } from 'redux/_common/actions';
 import styles from './styles.module.scss';
-
-const tabs = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
 type MoviesNavbarTabsProps = {
   className?: string;
 };
 
 const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ className }) => {
-  const [activeTab, setActiveTab] = React.useState(tabs[0]);
-  const history = useHistory();
+  const { activeTab } = useSelector(commonSelector);
+  const dispatch = useDispatch();
 
   const handleTabClick = React.useCallback(
     (tab) => {
-      history.push({ hash: `#${tab}` });
-      setActiveTab(tab);
+      dispatch(setActiveTabAction(tab));
     },
-    [history]
+    [dispatch]
   );
-
-  React.useEffect(() => {
-    if (!history.location.hash) {
-      history.push({ hash: `#${tabs[0]}` });
-    } else {
-      setActiveTab(history.location.hash.split('#')[1]);
-    }
-  }, [history]);
 
   return (
     <ul className={cn(styles.root, className)}>

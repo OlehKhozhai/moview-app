@@ -12,7 +12,7 @@ const useClickOutside = ({
   callback,
   handler = 'click',
   closeOnOutsideClick = true,
-}: Props): { isClickOutside: boolean } => {
+}: Props) => {
   const [isClickOutside, setClickOutside] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const useClickOutside = ({
     };
   }, [handler, ref, closeOnOutsideClick, callback]);
 
-  return { isClickOutside };
+  return [isClickOutside];
 };
 
 export default useClickOutside;

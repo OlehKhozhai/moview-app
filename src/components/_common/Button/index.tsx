@@ -1,15 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
 type ButtonProps = {
-  title: string;
+  title: string | React.ReactNode;
   type?: 'button' | 'submit';
   linkTo?: string;
   variation?: 'primary' | 'primaryOutline' | 'secondary';
-  children?: ReactNode;
+  children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
 }) => {
   return linkTo ? (
-    <Link to={linkTo} className={cn(styles.root, styles[type], className)}>
+    <Link to={linkTo} className={cn(styles.root, styles[variation], className)}>
       {title || children}
     </Link>
   ) : (

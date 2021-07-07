@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { useHistory } from 'react-router-dom';
 
 import useDropdown from 'hooks/useDropdown';
 import Dropdown from 'components/_common/Dropdown';
@@ -7,11 +8,11 @@ import DeleteMovie from 'components/_common/DeleteMovie';
 import Modal from 'components/_common/Modal';
 import useOpenAndClose from 'hooks/useOpenAndClose';
 import CreateAndEditMovie from 'components/_common/CreateAndEditMovie';
+import { movieOptions } from 'config';
 import styles from './styles.module.scss';
 
-const options = ['edit', 'delete'];
-
 type MoviesListItemProps = {
+  id: string;
   image: string;
   title: string;
   genre: string;
@@ -20,35 +21,46 @@ type MoviesListItemProps = {
 };
 
 const MoviesListItem: React.FC<MoviesListItemProps> = ({
+  id,
   image,
   title,
   genre,
   year,
   className,
 }) => {
+  const history = useHistory();
   const { value, isDropdownVisible, onOptionClick, onToggleDropdownVisibility, onCloseDropdown } =
-    useDropdown({});
+    useDropdown();
   const {
     isOpen: isOpenDeleteMovieModal,
     onClose: onCloseDeleteMovieModal,
     onOpen: onOpenDeleteMovieModal,
   } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
-  const { isOpen, onClose, onOpen } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
+  const {
+    isOpen: isOpenEditMovieModal,
+    onClose: onCloseEditMovieModal,
+    onOpen: onOpenEditMovieModal,
+  } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
+
+  const handleClickOnMovie = () => {
+    history.push(`/details/${id}`);
+    window.scrollTo({ behavior: 'smooth', top: 0 });
+  };
 
   React.useEffect(() => {
     if (value === 'edit') {
-      onOpen();
+      onOpenEditMovieModal();
     }
     if (value === 'delete') {
       onOpenDeleteMovieModal();
     }
-  }, [value, onOpen, onOpenDeleteMovieModal]);
+  }, [value, onOpenEditMovieModal, onOpenDeleteMovieModal]);
 
   return (
     <>
-      <li className={cn(styles.root, className)}>
+      <li className={cn(styles.root, className)} onClick={handleClickOnMovie}>
         <Dropdown
-          options={options}
+          options={movieOptions}
           isOpen={isDropdownVisible}
           onToggle={onToggleDropdownVisibility}
           onClose={onCloseDropdown}
@@ -72,8 +84,8 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
         </Modal>
       )}
 
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={onClose}>
+      {isOpenEditMovieModal && (
+        <Modal isOpen={isOpenEditMovieModal} onClose={onCloseEditMovieModal}>
           <CreateAndEditMovie action="edit" />
         </Modal>
       )}
