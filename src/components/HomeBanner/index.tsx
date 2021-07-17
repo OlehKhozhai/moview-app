@@ -14,7 +14,7 @@ type HomeBannerProps = {
 };
 
 const HomeBanner: React.FC<HomeBannerProps> = ({ className }) => {
-  const { isOpen, onClose, onOpen } = useOpenAndClose({});
+  const { isOpen, onClose, onOpen } = useOpenAndClose();
 
   return (
     <>

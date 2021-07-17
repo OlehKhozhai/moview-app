@@ -1,28 +1,39 @@
 import React from 'react';
 
-type Props = { onCloseCallback?: () => void };
+type Props = { onCloseCallback?: () => void } | undefined;
 
-const useOpenAndClose = ({ onCloseCallback = () => {} }: Props) => {
+const useOpenAndClose = (props: Props = {}) => {
+  const { onCloseCallback } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
-    onCloseCallback();
+    if (onCloseCallback) {
+      onCloseCallback();
+    }
+
     setIsOpen(false);
-  }, []);
+  }, [onCloseCallback]);
 
   const handleOpen = React.useCallback(() => {
     setIsOpen(true);
   }, []);
 
-  const handleToggle = React.useCallback(() => {
-    setIsOpen((prevState) => {
-      if (!prevState) {
-        onCloseCallback();
+  const handleToggle = React.useCallback(
+    (e?: React.MouseEvent<HTMLElement>) => {
+      if (e) {
+        e.stopPropagation();
       }
 
-      return !prevState;
-    });
-  }, []);
+      setIsOpen((prevState) => {
+        if (!prevState && onCloseCallback) {
+          onCloseCallback();
+        }
+
+        return !prevState;
+      });
+    },
+    [onCloseCallback]
+  );
 
   return {
     isOpen,

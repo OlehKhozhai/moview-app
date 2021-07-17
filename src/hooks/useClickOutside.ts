@@ -12,10 +12,11 @@ const useClickOutside = ({
   callback,
   handler = 'click',
   closeOnOutsideClick = true,
-}: Props): { isClickOutside: boolean } => {
+}: Props) => {
   const [isClickOutside, setClickOutside] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleClick = (e: any) => {
       const targetIsValid = e.target && document.contains(e.target);
       if (ref && ref.current && targetIsValid) {
@@ -36,9 +37,9 @@ const useClickOutside = ({
     return () => {
       document.removeEventListener(handler, handleClick);
     };
-  }, [handler, ref, closeOnOutsideClick]);
+  }, [handler, ref, closeOnOutsideClick, callback]);
 
-  return { isClickOutside };
+  return [isClickOutside];
 };
 
 export default useClickOutside;

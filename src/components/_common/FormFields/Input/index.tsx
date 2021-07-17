@@ -11,10 +11,10 @@ type InputProps = {
   className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input: React.FC<InputProps> = ({ label, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [field, meta] = useField({ ...props });
-  const isPasswordType = props.type === 'password';
+  const isPasswordType = type === 'password';
 
   React.useEffect(() => {
     if (isPasswordType) {
@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({ label, ...props }) => {
         className={cn(styles.input, { [styles.errorInput]: meta.touched && meta.error })}
         {...field}
         {...props}
-        type={isPasswordType && showPassword ? 'password' : props.type}
+        type={isPasswordType && showPassword ? 'password' : type}
       />
       {isPasswordType && (
         <span className={styles.passwordVisibilityIcon} onClick={handleShowPassword}>

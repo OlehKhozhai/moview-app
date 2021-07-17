@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -12,6 +15,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', './dist'),
     filename: '[name].[fullhash].js',
+    publicPath: '/',
   },
   optimization: {
     usedExports: true,
@@ -19,6 +23,7 @@ module.exports = {
   devServer: {
     port: 3000,
     contentBase: path.resolve(__dirname, '..', './dist'),
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -38,6 +43,9 @@ module.exports = {
           noErrorOnMissing: true,
         },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ['ts', 'tsx'],
     }),
   ],
   resolve: {
@@ -84,7 +92,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(svg|png|jpg|jpeg)$/i,
+        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
         use: ['file-loader'],
       },
     ],

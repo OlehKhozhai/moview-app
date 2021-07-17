@@ -2,18 +2,24 @@ import React from 'react';
 
 import useOpenAndClose from 'hooks/useOpenAndClose';
 
-type Props = {
-  defaultValue?: string;
-};
+type Props =
+  | {
+      defaultValue?: string;
+    }
+  | undefined;
 
-const useDropdown = ({ defaultValue }: Props) => {
+const useDropdown = (props: Props = {}) => {
+  const { defaultValue } = props;
   const [value, setValue] = React.useState(defaultValue || '');
-  const { isOpen, onToggle, onClose } = useOpenAndClose({});
+  const { isOpen, onToggle, onClose } = useOpenAndClose();
 
-  const handleOptionClick = React.useCallback((option: string) => {
-    setValue(option);
-    onClose();
-  }, []);
+  const handleOptionClick = React.useCallback(
+    (option: string) => {
+      setValue(option);
+      onClose();
+    },
+    [onClose]
+  );
 
   return {
     value,
