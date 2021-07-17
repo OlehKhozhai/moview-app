@@ -1,9 +1,3 @@
-import {
-  RemoveMovieSuccessAction,
-  REMOVE_MOVIE_FAIL,
-  RemoveMovieFailAction,
-  REMOVE_MOVIE,
-} from './types';
 import { AppStore } from 'redux/store';
 import { BASE_URL, DROPDOWN_OPTIONS_DEFINITION } from 'config';
 import {
@@ -36,6 +30,10 @@ import {
   EDIT_MOVIE_SUCCESS,
   EDIT_MOVIE_FAIL,
   EDIT_MOVIE,
+  RemoveMovieSuccessAction,
+  REMOVE_MOVIE_FAIL,
+  RemoveMovieFailAction,
+  REMOVE_MOVIE,
   REMOVE_MOVIE_SUCCESS,
 } from 'redux/types';
 
