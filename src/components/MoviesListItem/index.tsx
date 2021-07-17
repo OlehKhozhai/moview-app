@@ -8,24 +8,20 @@ import DeleteMovie from 'components/_common/DeleteMovie';
 import Modal from 'components/_common/Modal';
 import useOpenAndClose from 'hooks/useOpenAndClose';
 import CreateAndEditMovie from 'components/_common/CreateAndEditMovie';
-import { movieOptions } from 'config';
+import { MOVIE_OPTIONS } from 'config';
+import { Movie } from 'redux/types';
 import styles from './styles.module.scss';
 
-type MoviesListItemProps = {
-  id: string;
-  image: string;
-  title: string;
-  genre: string;
-  year: string;
+type MoviesListItemProps = Movie & {
   className?: string;
 };
 
 const MoviesListItem: React.FC<MoviesListItemProps> = ({
   id,
-  image,
+  poster_path,
   title,
-  genre,
-  year,
+  genres,
+  release_date,
   className,
 }) => {
   const history = useHistory();
@@ -60,7 +56,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
     <>
       <li className={cn(styles.root, className)} onClick={handleClickOnMovie}>
         <Dropdown
-          options={movieOptions}
+          options={MOVIE_OPTIONS}
           isOpen={isDropdownVisible}
           onToggle={onToggleDropdownVisibility}
           onClose={onCloseDropdown}
@@ -68,14 +64,18 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
           className={styles.dropdown}
         />
 
-        <img src={image} alt={title} className={styles.image} />
+        <img src={poster_path} alt={title} className={styles.image} />
 
         <div className={styles.titleAndImageWrapper}>
           <h4 className={styles.title}>{title}</h4>
-          <span className={styles.year}>{year}</span>
+          <span className={styles.year}>{release_date}</span>
         </div>
 
-        <h5 className={styles.genre}>{genre}</h5>
+        <h5 className={styles.genre}>
+          {genres.map((genre) => (
+            <span key={genre}> {genre} |</span>
+          ))}
+        </h5>
       </li>
 
       {isOpenDeleteMovieModal && (

@@ -6,7 +6,7 @@ import useClickOutside from 'hooks/useClickOutside';
 import styles from './styles.module.scss';
 
 type DropdownProps = {
-  options: string[];
+  options: ReadonlyArray<string>;
   isOpen: boolean;
   value?: string;
   className?: string;

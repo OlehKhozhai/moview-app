@@ -3,9 +3,9 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MoviesNavbarTabItem from 'components/MoviesNavbarTabItem';
-import { tabs } from 'config';
-import { commonSelector } from 'redux/_common/selectors';
-import { setActiveTabAction } from 'redux/_common/actions';
+import { TABS } from 'config';
+import { setActiveTabAction } from 'redux/actions';
+import { activeTabSelector } from 'redux/selectors';
 import styles from './styles.module.scss';
 
 type MoviesNavbarTabsProps = {
@@ -13,7 +13,7 @@ type MoviesNavbarTabsProps = {
 };
 
 const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ className }) => {
-  const { activeTab } = useSelector(commonSelector);
+  const activeTab = useSelector(activeTabSelector);
   const dispatch = useDispatch();
 
   const handleTabClick = React.useCallback(
@@ -25,7 +25,7 @@ const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ className }) => {
 
   return (
     <ul className={cn(styles.root, className)}>
-      {tabs.map((tab) => {
+      {TABS.map((tab) => {
         return (
           <MoviesNavbarTabItem
             key={tab}

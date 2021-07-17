@@ -1,8 +1,17 @@
-export const movieOptions = ['edit', 'delete'];
+export const MOVIE_OPTIONS = ['edit', 'delete'];
 
-export const tabs = ['all', 'documentary', 'comedy', 'horror', 'crime'] as const;
+export const TABS = ['all', 'documentary', 'comedy', 'horror', 'crime'] as const;
 
-export const movies = [
+export const DROPDOWN_OPTIONS = ['release date', 'rating'] as const;
+
+export const DROPDOWN_OPTIONS_DEFINITION = {
+  'release date': 'release_date',
+  rating: 'vote_average',
+};
+
+export const BASE_URL = 'http://localhost:4000/movies';
+
+export const MOVIES = [
   {
     id: '1',
     image: 'https://via.placeholder.com/330x450',
