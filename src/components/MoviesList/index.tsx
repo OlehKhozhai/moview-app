@@ -1,34 +1,34 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
 
 import MoviesListItem from 'components/MoviesListItem';
-import { movies } from 'config';
-import { commonSelector } from 'redux/_common/selectors';
+import { Movie } from 'redux/types';
 import styles from './styles.module.scss';
 
 type MoviesListProps = {
+  movies: Movie[];
+  isLoading: boolean;
   className?: string;
 };
 
-const MoviesList: React.FC<MoviesListProps> = ({ className }) => {
-  const { activeTab } = useSelector(commonSelector);
-
-  const filteredMovies = movies.filter(({ genre }) => genre === activeTab || activeTab === 'all');
-
+const MoviesList: React.FC<MoviesListProps> = ({ movies, isLoading, className }) => {
   return (
     <div className={cn(styles.root, className)}>
-      {filteredMovies.length > 0 && (
+      {movies.length > 0 && (
         <>
-          <h3 className={styles.counter}>{filteredMovies.length} movies found</h3>
+          <h3 className={styles.counter}>{movies.length} movies found</h3>
 
-          {filteredMovies.map((movie) => {
+          {movies.map((movie) => {
             return <MoviesListItem key={movie.id} {...movie} />;
           })}
         </>
       )}
 
-      {filteredMovies.length === 0 && <h2 className={styles.noMovieFound}>No movies found</h2>}
+      {movies.length === 0 && !isLoading && (
+        <h2 className={styles.noMovieFound}>No movies found</h2>
+      )}
+
+      {isLoading && <h2>Loading</h2>}
     </div>
   );
 };

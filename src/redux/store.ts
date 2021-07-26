@@ -1,10 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import commonReducer from 'redux/_common/reducer';
+import rootReducer from 'redux/reducer';
 
-const rootReducer = combineReducers({ common: commonReducer });
 const middleware = [thunk];
 const enhancer = composeWithDevTools(applyMiddleware(...middleware));
 
