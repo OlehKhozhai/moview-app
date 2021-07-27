@@ -26,11 +26,10 @@
   }
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   opacity: 0.6;
   filter: invert(0.8);
   cursor: pointer;
-
 }
 
 .errorInput {
@@ -38,7 +37,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .errorMessage {
-  bottom: 15px;
+  bottom: 10px;
 }
 
 .passwordVisibilityIcon {
@@ -46,4 +45,3 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   right: 0;
   top: 45%;
 }
-
