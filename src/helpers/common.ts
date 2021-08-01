@@ -3,11 +3,14 @@ export const capitalizeFirstLetter = (string: string): string =>
 
 export const cutOffFirstLetter = (string: string) => string.slice(1);
 
-export const getErrors = (errors: string[]) =>
-  errors.reduce((acc: Record<string, string>, current?: string) => {
-    if (current) {
-      const splitError = current.split('"');
-      acc[splitError[1]] = splitError[2];
+export const getErrors = (errorsArray: string[]) =>
+  errorsArray.reduce((errors: Record<string, string>, error?: string) => {
+    if (error) {
+      const [, key, value] = error.split('"');
+      errors[key] = value;
     }
-    return acc;
+    return errors;
   }, {});
+
+export const getSearchParam = (query: string, key: string): string =>
+  new URLSearchParams(query).get(key) || '';

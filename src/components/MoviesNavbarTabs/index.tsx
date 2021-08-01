@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import MoviesNavbarTabItem from 'components/MoviesNavbarTabItem';
 import { TABS } from 'config';
+import { getSearchParam } from 'helpers/common';
 import styles from './styles.module.scss';
 
 type MoviesNavbarTabsProps = {
@@ -13,7 +14,7 @@ type MoviesNavbarTabsProps = {
 
 const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ searchParams, className }) => {
   const { replace: historyReplace } = useHistory();
-  const activeTab = new URLSearchParams(searchParams).get('search');
+  const activeTab = getSearchParam(searchParams, 'search');
 
   const handleTabClick = React.useCallback(
     (tab) => {
@@ -27,11 +28,13 @@ const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ searchParams, class
   return (
     <ul className={cn(styles.root, className)}>
       {TABS.map((tab) => {
+        const allTabsIsActive = activeTab === '' && tab === 'all';
+
         return (
           <MoviesNavbarTabItem
             key={tab}
             title={tab}
-            isActive={activeTab === tab || (activeTab === '' && tab === 'all')}
+            isActive={activeTab === tab || allTabsIsActive}
             onTabClick={handleTabClick}
           />
         );

@@ -35,6 +35,8 @@ const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
   onSubmit,
 }) => {
   const dispatch = useDispatch();
+  const formTitle = action === 'create' ? 'Add movie' : 'Edit movie';
+  const initialFormValues = initialValues || defaultValues;
 
   const handleSubmit = async (
     values: Partial<Movie>,
@@ -58,13 +60,13 @@ const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
 
   return (
     <Formik
-      initialValues={action === 'edit' && initialValues ? initialValues : defaultValues}
+      initialValues={initialFormValues}
       validationSchema={createMovieValidationSchema}
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }: FormikProps<Partial<Movie>>) => (
         <Form className={styles.root}>
-          <h2 className={styles.title}>{action === 'create' ? 'Add movie' : 'Edit movie'}</h2>
+          <h2 className={styles.title}>{formTitle}</h2>
 
           <Input name="title" label="Title" placeholder="Enter title" />
           <Input
