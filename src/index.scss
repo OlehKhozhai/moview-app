@@ -221,11 +221,6 @@ input[type="submit"] {
   *overflow: visible; /* 4 */
 }
 
-button[disabled],
-html input[disabled] {
-  cursor: default;
-}
-
 input[type='checkbox'],
 input[type='radio'] {
   box-sizing: border-box; /* 1 */

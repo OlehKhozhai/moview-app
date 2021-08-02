@@ -1,27 +1,33 @@
 import React from 'react';
 import cn from 'classnames';
-import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Dropdown from 'components/_common/Dropdown';
-import useDropdown from 'hooks/useDropdown';
-import { DROPDOWN_OPTIONS, DROPDOWN_OPTIONS_DEFINITION } from 'config';
-import { setActiveSortByAction } from 'redux/actions';
+import { DROPDOWN_OPTIONS } from 'config';
+import useOpenAndClose from 'hooks/useOpenAndClose';
+import { getSearchParam } from 'helpers/common';
 import styles from './styles.module.scss';
 
 type MoviesNavbarSortByProps = {
+  searchParams: string;
   className?: string;
 };
 
-const MoviesNavbarSortBy: React.FC<MoviesNavbarSortByProps> = ({ className }) => {
-  const dispatch = useDispatch();
-  const { value, isDropdownVisible, onOptionClick, onToggleDropdownVisibility, onCloseDropdown } =
-    useDropdown({
-      defaultValue: DROPDOWN_OPTIONS[0],
-    });
+const MoviesNavbarSortBy: React.FC<MoviesNavbarSortByProps> = ({ searchParams, className }) => {
+  const { replace: historyReplace } = useHistory();
+  const { isOpen, onToggle, onClose } = useOpenAndClose();
 
-  React.useEffect(() => {
-    dispatch(setActiveSortByAction(value as keyof typeof DROPDOWN_OPTIONS_DEFINITION));
-  }, [value, dispatch]);
+  const newSearchParams = React.useMemo(() => new URLSearchParams(searchParams), [searchParams]);
+  const sortBy = getSearchParam(searchParams, 'sortBy');
+
+  const handleOptionClick = React.useCallback(
+    (option: string) => {
+      newSearchParams.set('sortBy', option);
+      historyReplace({ search: newSearchParams.toString() });
+      onClose();
+    },
+    [newSearchParams, onClose, historyReplace]
+  );
 
   return (
     <div className={cn(styles.root, className)}>
@@ -29,11 +35,11 @@ const MoviesNavbarSortBy: React.FC<MoviesNavbarSortByProps> = ({ className }) =>
 
       <Dropdown
         options={DROPDOWN_OPTIONS}
-        value={value}
-        isOpen={isDropdownVisible}
-        onToggle={onToggleDropdownVisibility}
-        onClose={onCloseDropdown}
-        onOptionClick={onOptionClick}
+        value={sortBy}
+        isOpen={isOpen}
+        onToggle={onToggle}
+        onClose={onClose}
+        onOptionClick={handleOptionClick}
       />
     </div>
   );

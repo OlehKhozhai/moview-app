@@ -1,36 +1,40 @@
 import React from 'react';
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import MoviesNavbarTabItem from 'components/MoviesNavbarTabItem';
 import { TABS } from 'config';
-import { setActiveTabAction } from 'redux/actions';
-import { activeTabSelector } from 'redux/selectors';
+import { getSearchParam } from 'helpers/common';
 import styles from './styles.module.scss';
 
 type MoviesNavbarTabsProps = {
+  searchParams: string;
   className?: string;
 };
 
-const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ className }) => {
-  const activeTab = useSelector(activeTabSelector);
-  const dispatch = useDispatch();
+const MoviesNavbarTabs: React.FC<MoviesNavbarTabsProps> = ({ searchParams, className }) => {
+  const { replace: historyReplace } = useHistory();
+  const activeTab = getSearchParam(searchParams, 'search');
 
   const handleTabClick = React.useCallback(
     (tab) => {
-      dispatch(setActiveTabAction(tab));
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set('search', tab === 'all' ? '' : tab);
+      historyReplace({ search: newSearchParams.toString() });
     },
-    [dispatch]
+    [historyReplace, searchParams]
   );
 
   return (
     <ul className={cn(styles.root, className)}>
       {TABS.map((tab) => {
+        const allTabsIsActive = activeTab === '' && tab === 'all';
+
         return (
           <MoviesNavbarTabItem
             key={tab}
             title={tab}
-            isActive={activeTab === tab}
+            isActive={activeTab === tab || allTabsIsActive}
             onTabClick={handleTabClick}
           />
         );

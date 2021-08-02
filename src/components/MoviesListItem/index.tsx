@@ -1,15 +1,17 @@
 import React from 'react';
 import cn from 'classnames';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import useDropdown from 'hooks/useDropdown';
+import useOpenAndClose from 'hooks/useOpenAndClose';
 import Dropdown from 'components/_common/Dropdown';
 import DeleteMovie from 'components/_common/DeleteMovie';
 import Modal from 'components/_common/Modal';
-import useOpenAndClose from 'hooks/useOpenAndClose';
 import CreateAndEditMovie from 'components/_common/CreateAndEditMovie';
 import { MOVIE_OPTIONS } from 'config';
 import { Movie } from 'redux/types';
+import { removeMovieAction } from 'redux/actions';
 import styles from './styles.module.scss';
 
 type MoviesListItemProps = Movie & {
@@ -17,13 +19,16 @@ type MoviesListItemProps = Movie & {
 };
 
 const MoviesListItem: React.FC<MoviesListItemProps> = ({
+  className,
   id,
   poster_path,
   title,
   genres,
   release_date,
-  className,
+  runtime,
+  overview,
 }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { value, isDropdownVisible, onOptionClick, onToggleDropdownVisibility, onCloseDropdown } =
     useDropdown();
@@ -42,6 +47,11 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
     history.push(`/details/${id}`);
     window.scrollTo({ behavior: 'smooth', top: 0 });
   };
+
+  const handleOnConfirmMovieRemove = React.useCallback(() => {
+    onCloseDeleteMovieModal();
+    dispatch(removeMovieAction(id));
+  }, [id, dispatch, onCloseDeleteMovieModal]);
 
   React.useEffect(() => {
     if (value === 'edit') {
@@ -80,13 +90,25 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
 
       {isOpenDeleteMovieModal && (
         <Modal isOpen={isOpenDeleteMovieModal} onClose={onCloseDeleteMovieModal}>
-          <DeleteMovie onConfirm={onCloseDeleteMovieModal} />
+          <DeleteMovie onConfirm={handleOnConfirmMovieRemove} />
         </Modal>
       )}
 
       {isOpenEditMovieModal && (
         <Modal isOpen={isOpenEditMovieModal} onClose={onCloseEditMovieModal}>
-          <CreateAndEditMovie action="edit" />
+          <CreateAndEditMovie
+            action="edit"
+            movieId={id}
+            initialValues={{
+              title,
+              genres,
+              overview,
+              poster_path,
+              release_date,
+              runtime: runtime || 0,
+            }}
+            onSubmit={onCloseEditMovieModal}
+          />
         </Modal>
       )}
     </>

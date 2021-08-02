@@ -29,7 +29,7 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ className }) => {
 
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
-          <CreateAndEditMovie />
+          <CreateAndEditMovie onSubmit={onClose} />
         </Modal>
       )}
     </>

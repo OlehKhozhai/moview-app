@@ -6,14 +6,15 @@ import MoviesNavbarSortBy from 'components/MoviesNavbarSortBy';
 import styles from './styles.module.scss';
 
 type MoviesNavbarProps = {
+  searchParams: string;
   className?: string;
 };
 
-const MoviesNavbar: React.FC<MoviesNavbarProps> = ({ className }) => {
+const MoviesNavbar: React.FC<MoviesNavbarProps> = ({ searchParams, className }) => {
   return (
     <nav className={cn(styles.root, className)}>
-      <MoviesNavbarTabs />
-      <MoviesNavbarSortBy />
+      <MoviesNavbarTabs searchParams={searchParams} />
+      <MoviesNavbarSortBy searchParams={searchParams} />
     </nav>
   );
 };

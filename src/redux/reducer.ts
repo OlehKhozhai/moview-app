@@ -4,7 +4,6 @@ import {
   GET_MOVIE_DETAILS,
   GET_MOVIE_DETAILS_FAIL,
   GET_MOVIE_DETAILS_SUCCESS,
-  SET_ACTIVE_SORT_BY,
   CREATE_MOVIE,
   CREATE_MOVIE_FAIL,
   CREATE_MOVIE_SUCCESS,
@@ -15,36 +14,22 @@ import {
   REMOVE_MOVIE_SUCCESS,
   REMOVE_MOVIE_FAIL,
 } from './types';
-import { DROPDOWN_OPTIONS, TABS } from 'config';
-import { ActionTypes, GET_MOVIES, RootReducer, SET_ACTIVE_TAB } from 'redux/types';
+import { ActionTypes, GET_MOVIES, RootReducer } from 'redux/types';
 
 const initialState: RootReducer = {
-  activeTab: TABS[0],
-  sortBy: DROPDOWN_OPTIONS[0],
   movies: [],
   isMoviesLoading: false,
   movieDetails: null,
-  error: '',
+  error: null,
 };
 
 export default (state = initialState, action: ActionTypes): RootReducer => {
   switch (action.type) {
-    case SET_ACTIVE_TAB:
-      return {
-        ...state,
-        activeTab: action.payload,
-      };
-
-    case SET_ACTIVE_SORT_BY:
-      return {
-        ...state,
-        sortBy: action.payload,
-      };
-
     case GET_MOVIES:
       return {
         ...state,
         isMoviesLoading: true,
+        error: null,
       };
     case GET_MOVIES_SUCCESS:
       return {
@@ -61,7 +46,7 @@ export default (state = initialState, action: ActionTypes): RootReducer => {
       };
 
     case GET_MOVIE_DETAILS:
-      return state;
+      return { ...state, error: null };
     case GET_MOVIE_DETAILS_SUCCESS:
       return {
         ...state,
@@ -77,10 +62,18 @@ export default (state = initialState, action: ActionTypes): RootReducer => {
     case CREATE_MOVIE:
     case EDIT_MOVIE:
     case REMOVE_MOVIE:
-    case CREATE_MOVIE_SUCCESS:
-    case EDIT_MOVIE_SUCCESS:
     case REMOVE_MOVIE_SUCCESS:
-      return state;
+    case CREATE_MOVIE_SUCCESS:
+      return { ...state, error: null };
+    case EDIT_MOVIE_SUCCESS:
+      return {
+        ...state,
+        movies: state.movies.map((movie) =>
+          movie.id === action.payload.id ? action.payload : movie
+        ),
+        movieDetails:
+          state.movieDetails?.id === action.payload.id ? action.payload : state.movieDetails,
+      };
     case CREATE_MOVIE_FAIL:
     case EDIT_MOVIE_FAIL:
     case REMOVE_MOVIE_FAIL:

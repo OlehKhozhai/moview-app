@@ -1,65 +1,84 @@
 import React from 'react';
-import { Form, Formik, FormikProps, FormikHelpers } from 'formik';
+import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import Input from 'components/_common/FormFields/Input';
 import Button from 'components/_common/Button';
+import Select from 'components/_common/FormFields/Select';
+import { createMovieAction, editMovieAction } from 'redux/actions';
+import { Movie } from 'redux/types';
+import { GENRES } from 'config';
 import { createMovieValidationSchema } from 'helpers/validators';
+import { getErrors } from 'helpers/common';
 import styles from './styles.module.scss';
 
-type Values = {
-  title: string;
-  realiseDate: string;
-  url: string;
-  genre: string;
-  overview: string;
-  runtime: string;
-};
-
-const initialValues: Values = {
+const defaultValues: Partial<Movie> = {
   title: '',
-  realiseDate: '',
-  url: '',
-  genre: '',
+  release_date: '',
+  poster_path: '',
+  genres: [],
   overview: '',
-  runtime: '',
+  runtime: 0,
 };
 
-type CreateAndEditMovieModalProps = {
+type CreateAndEditMovieProps = {
   action?: 'create' | 'edit';
+  movieId?: number;
+  initialValues?: Partial<Movie>;
+  onSubmit: () => void;
 };
 
-const CreateAndEditMovieModal: React.FC<CreateAndEditMovieModalProps> = ({ action = 'create' }) => {
-  const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
+  action = 'create',
+  initialValues,
+  movieId,
+  onSubmit,
+}) => {
+  const dispatch = useDispatch();
+  const formTitle = action === 'create' ? 'Add movie' : 'Edit movie';
+  const initialFormValues = initialValues || defaultValues;
+
+  const handleSubmit = async (
+    values: Partial<Movie>,
+    { setSubmitting, setErrors }: FormikHelpers<Partial<Movie>>
+  ) => {
+    let errors = null as unknown;
     setSubmitting(true);
 
-    setTimeout(() => {
-      // eslint-disable-next-line no-console
-      console.log(JSON.stringify(values, null, 2));
+    if (action === 'edit' && movieId) {
+      errors = await dispatch<unknown>(editMovieAction({ ...values, id: movieId }));
+    } else {
+      errors = await dispatch<unknown>(createMovieAction(values));
+    }
+    if (!errors) {
+      onSubmit();
       setSubmitting(false);
-    }, 400);
+    } else {
+      setErrors(getErrors(errors as string[]));
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initialFormValues}
       validationSchema={createMovieValidationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }: FormikProps<Values>) => (
+      {({ isSubmitting }: FormikProps<Partial<Movie>>) => (
         <Form className={styles.root}>
-          <h2 className={styles.title}>{action === 'create' ? 'Add movie' : 'Edit movie'}</h2>
+          <h2 className={styles.title}>{formTitle}</h2>
 
           <Input name="title" label="Title" placeholder="Enter title" />
           <Input
-            name="realiseDate"
-            label="Realise date"
+            name="release_date"
+            label="Release date"
             type="date"
             placeholder="Enter realise date"
           />
-          <Input name="url" label="Movie url" placeholder="Enter url" />
-          <Input name="genre" label="Genre" />
+          <Input name="poster_path" label="Movie url" placeholder="Enter url" />
+          <Select name="genres" label="Genre" placeholder="Choose Genres" options={GENRES} />
           <Input name="overview" label="Overview" placeholder="Enter overview" />
-          <Input name="runtime" label="Runtime" placeholder="Enter runtime" />
+          <Input name="runtime" label="Runtime" placeholder="Enter runtime" type="number" />
 
           <div className={styles.buttonsWrapper}>
             <Button title="Reset" variation="primaryOutline" className={styles.resetBtn} />
@@ -75,4 +94,4 @@ const CreateAndEditMovieModal: React.FC<CreateAndEditMovieModalProps> = ({ actio
   );
 };
 
-export default React.memo(CreateAndEditMovieModal);
+export default React.memo(CreateAndEditMovie);

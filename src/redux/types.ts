@@ -1,5 +1,3 @@
-import { TABS, DROPDOWN_OPTIONS_DEFINITION } from 'config';
-
 export type Movie = {
   id: number;
   title: string;
@@ -16,26 +14,10 @@ export type Movie = {
 };
 
 export interface RootReducer {
-  activeTab: typeof TABS[number];
-  sortBy: keyof typeof DROPDOWN_OPTIONS_DEFINITION;
   movies: Movie[];
   isMoviesLoading: boolean;
   movieDetails: Movie | null;
-  error: string;
-}
-
-// SET_ACTIVE_TAB
-export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB';
-export interface SetCurrentTabAction {
-  type: typeof SET_ACTIVE_TAB;
-  payload: typeof TABS[number];
-}
-
-// SET_ACTIVE_SORT_BY
-export const SET_ACTIVE_SORT_BY = 'SET_ACTIVE_SORT_BY';
-export interface SetCurrentSortByAction {
-  type: typeof SET_ACTIVE_SORT_BY;
-  payload: keyof typeof DROPDOWN_OPTIONS_DEFINITION;
+  error: null | string | Array<string>;
 }
 
 // GET_MOVIES
@@ -45,9 +27,7 @@ export const GET_MOVIES_FAIL = 'GET_MOVIES_FAIL';
 export interface GetMoviesAction {
   type: typeof GET_MOVIES;
   payload: {
-    search?: string;
-    searchBy?: 'genres' | 'title' | '';
-    sortBy?: string;
+    params: string;
   };
 }
 export interface GetMoviesSuccessAction {
@@ -82,7 +62,7 @@ export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS';
 export const CREATE_MOVIE_FAIL = 'CREATE_MOVIE_FAIL';
 export interface CreateMovieAction {
   type: typeof CREATE_MOVIE;
-  payload: Movie;
+  payload: Partial<Movie>;
 }
 export interface CreateMovieSuccessAction {
   type: typeof CREATE_MOVIE_SUCCESS;
@@ -99,7 +79,7 @@ export const EDIT_MOVIE_SUCCESS = 'EDIT_MOVIE_SUCCESS';
 export const EDIT_MOVIE_FAIL = 'EDIT_MOVIE_FAIL';
 export interface EditMovieAction {
   type: typeof EDIT_MOVIE;
-  payload: Movie;
+  payload: Partial<Movie>;
 }
 export interface EditMovieSuccessAction {
   type: typeof EDIT_MOVIE_SUCCESS;
@@ -127,8 +107,6 @@ export interface RemoveMovieFailAction {
 }
 
 export type ActionTypes =
-  | SetCurrentTabAction
-  | SetCurrentSortByAction
   | GetMoviesAction
   | GetMoviesSuccessAction
   | GetMoviesFailAction
