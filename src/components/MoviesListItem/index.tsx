@@ -44,7 +44,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
   } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
 
   const handleClickOnMovie = () => {
-    history.push(`/details/${id}`);
+    history.push(`/movies/${id}`);
     window.scrollTo({ behavior: 'smooth', top: 0 });
   };
 
