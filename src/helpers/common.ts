@@ -14,3 +14,19 @@ export const getErrors = (errorsArray: string[]) =>
 
 export const getSearchParam = (query: string, key: string): string =>
   new URLSearchParams(query).get(key) || '';
+
+export const setSearchParams = ({
+  query,
+  params,
+}: {
+  query: string;
+  params: Array<{ key: string; value: string }>;
+}): string => {
+  const searchParams = new URLSearchParams(query);
+
+  params.forEach(({ key, value }) => {
+    searchParams.set(key, value);
+  });
+
+  return searchParams.toString();
+};
