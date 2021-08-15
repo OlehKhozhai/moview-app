@@ -3,7 +3,7 @@ import { useField } from 'formik';
 import cn from 'classnames';
 
 import ErrorMessage from 'components/_common/ErrorMessage';
-import useOpenAndClose from 'hooks/useOpenAndClose';
+import hooks from 'hooks';
 import useClickOutside from 'hooks/useClickOutside';
 import styles from './styles.module.scss';
 
@@ -18,7 +18,7 @@ type SelectProps = {
 const Select: React.FC<SelectProps> = ({ label, options, placeholder, ...props }) => {
   const [field, meta, { setValue }] = useField({ ...props });
   const dropdownRef = React.useRef<HTMLDivElement>(null);
-  const { isOpen, onClose, onOpen } = useOpenAndClose();
+  const { isOpen, onClose, onOpen } = hooks.useOpenAndClose();
   useClickOutside({ ref: dropdownRef, callback: isOpen ? onClose : undefined });
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

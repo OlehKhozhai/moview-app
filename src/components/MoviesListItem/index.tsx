@@ -1,10 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import { useHistory } from 'react-router-dom';
+import rdd from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import useDropdown from 'hooks/useDropdown';
-import useOpenAndClose from 'hooks/useOpenAndClose';
+import hooks from 'hooks';
 import Dropdown from 'components/_common/Dropdown';
 import DeleteMovie from 'components/_common/DeleteMovie';
 import Modal from 'components/_common/Modal';
@@ -29,19 +28,19 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
   overview,
 }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = rdd.useHistory();
   const { value, isDropdownVisible, onOptionClick, onToggleDropdownVisibility, onCloseDropdown } =
-    useDropdown();
+    hooks.useDropdown();
   const {
     isOpen: isOpenDeleteMovieModal,
     onClose: onCloseDeleteMovieModal,
     onOpen: onOpenDeleteMovieModal,
-  } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
+  } = hooks.useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
   const {
     isOpen: isOpenEditMovieModal,
     onClose: onCloseEditMovieModal,
     onOpen: onOpenEditMovieModal,
-  } = useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
+  } = hooks.useOpenAndClose({ onCloseCallback: () => onOptionClick('') });
 
   const handleClickOnMovie = () => {
     history.push(`/movies/${id}`);

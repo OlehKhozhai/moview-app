@@ -66,7 +66,6 @@ export interface CreateMovieAction {
 }
 export interface CreateMovieSuccessAction {
   type: typeof CREATE_MOVIE_SUCCESS;
-  payload: Movie;
 }
 export interface CreateMovieFailAction {
   type: typeof CREATE_MOVIE_FAIL;

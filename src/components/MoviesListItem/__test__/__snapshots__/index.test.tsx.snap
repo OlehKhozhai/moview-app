@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesListItem component should render MoviesListItem component by default 1`] = `
+<li
+  className="root"
+  onClick={[Function]}
+>
+  <div
+    className="root dropdown"
+  >
+    <span
+      className="threeDots"
+      onClick={[Function]}
+    >
+      ...
+    </span>
+  </div>
+  <img
+    alt="Movie 1"
+    className="image"
+    src="https://via.placeholder.com/330x450"
+  />
+  <div
+    className="titleAndImageWrapper"
+  >
+    <h4
+      className="title"
+    >
+      Movie 1
+    </h4>
+    <span
+      className="year"
+    >
+      1999
+    </span>
+  </div>
+  <h5
+    className="genre"
+  >
+    <span>
+       
+      Documentary
+       |
+    </span>
+  </h5>
+</li>
+`;

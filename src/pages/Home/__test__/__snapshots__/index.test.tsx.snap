@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component should render Home component by default on home page 1`] = `
+Array [
+  "---HomeBanner---",
+  "---Divider---",
+  "---MoviesNavbar---",
+  "---MoviesList---",
+  "---Footer---",
+]
+`;

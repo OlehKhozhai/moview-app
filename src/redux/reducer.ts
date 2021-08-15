@@ -16,7 +16,7 @@ import {
 } from './types';
 import { ActionTypes, GET_MOVIES, RootReducer } from 'redux/types';
 
-const initialState: RootReducer = {
+export const initialState: RootReducer = {
   movies: [],
   isMoviesLoading: false,
   movieDetails: null,

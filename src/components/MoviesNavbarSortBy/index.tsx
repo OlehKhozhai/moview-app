@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import Dropdown from 'components/_common/Dropdown';
 import { DROPDOWN_OPTIONS } from 'config';
-import useOpenAndClose from 'hooks/useOpenAndClose';
+import hooks from 'hooks';
 import { getSearchParam } from 'helpers/common';
 import styles from './styles.module.scss';
 
@@ -15,7 +15,7 @@ type MoviesNavbarSortByProps = {
 
 const MoviesNavbarSortBy: React.FC<MoviesNavbarSortByProps> = ({ searchParams, className }) => {
   const { replace: historyReplace } = useHistory();
-  const { isOpen, onToggle, onClose } = useOpenAndClose();
+  const { isOpen, onToggle, onClose } = hooks.useOpenAndClose();
 
   const newSearchParams = React.useMemo(() => new URLSearchParams(searchParams), [searchParams]);
   const sortBy = getSearchParam(searchParams, 'sortBy');

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetails component should render markup by default 1`] = `
+Array [
+  "---MovieDetailsBanner---",
+  "---Divider---",
+  "---MoviesNavbar---",
+  "---MoviesList---",
+  "---Footer---",
+]
+`;
