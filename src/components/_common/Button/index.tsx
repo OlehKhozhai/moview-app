@@ -5,7 +5,7 @@ import cn from 'classnames';
 import styles from './styles.module.scss';
 
 type ButtonProps = {
-  title: string | React.ReactNode;
+  title?: string | React.ReactNode;
   type?: 'button' | 'submit';
   linkTo?: string;
   variation?: 'primary' | 'primaryOutline' | 'secondary';

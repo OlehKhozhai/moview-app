@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component should render App component by default on home page 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="root"
+  >
+    <div
+      className="header"
+    >
+      <a
+        className="root"
+        href="/"
+        onClick={[Function]}
+      >
+        <span
+          className="bold"
+        >
+          netflix
+        </span>
+        roulete
+      </a>
+      <button
+        className="root secondary"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        + add movie
+      </button>
+    </div>
+    <h2
+      className="title"
+    >
+      Find your movie
+    </h2>
+    <div
+      className="root"
+    >
+      <input
+        className="input"
+        onChange={[Function]}
+        placeholder="What do you want to watch?"
+        value=""
+      />
+      <button
+        className="root primary button"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+  <hr
+    className="root"
+  />
+  <nav
+    className="root"
+  >
+    <ul
+      className="root"
+    >
+      <li
+        className="root active"
+        onClick={[Function]}
+      >
+        all
+      </li>
+      <li
+        className="root"
+        onClick={[Function]}
+      >
+        documentary
+      </li>
+      <li
+        className="root"
+        onClick={[Function]}
+      >
+        comedy
+      </li>
+      <li
+        className="root"
+        onClick={[Function]}
+      >
+        horror
+      </li>
+      <li
+        className="root"
+        onClick={[Function]}
+      >
+        crime
+      </li>
+    </ul>
+    <div
+      className="root"
+    >
+      <span
+        className="label"
+      >
+        Sort By
+      </span>
+      <div
+        className="root"
+      >
+        <span
+          className="value"
+          onClick={[Function]}
+        >
+          release date
+        </span>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="root"
+  >
+    <h2
+      className="noMovieFound"
+    >
+      No movies found
+    </h2>
+  </div>
+  <footer
+    className="root"
+  >
+    <a
+      className="root"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="bold"
+      >
+        netflix
+      </span>
+      roulete
+    </a>
+  </footer>
+</div>
+`;

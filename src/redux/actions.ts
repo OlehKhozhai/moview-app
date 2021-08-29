@@ -30,16 +30,17 @@ import {
   REMOVE_MOVIE,
   REMOVE_MOVIE_SUCCESS,
 } from 'redux/types';
-import { doFetch } from 'helpers/api';
+import helpers from 'helpers';
 
-type Dispatch = (data: unknown) => void;
+export type Dispatch = (data: unknown) => void;
 
 export const getMoviesAction =
   ({ params }: GetMoviesAction['payload']) =>
-  (dispatch: Dispatch) => {
+  async (dispatch: Dispatch) => {
     dispatch({ type: GET_MOVIES });
 
-    doFetch({ params: `?${params}&sortOrder=desc` })
+    return helpers
+      .doFetch({ params: `?${params}&sortOrder=desc` })
       .then(({ data }) => {
         dispatch({
           type: GET_MOVIES_SUCCESS,
@@ -61,7 +62,8 @@ export const getMovieDetailsAction =
       payload: id,
     } as GetMovieDetailsAction);
 
-    doFetch({ params: `/${id}` })
+    return helpers
+      .doFetch({ params: `/${id}` })
       .then((movie) => {
         dispatch({
           type: GET_MOVIE_DETAILS_SUCCESS,
@@ -82,7 +84,8 @@ export const createMovieAction =
       type: CREATE_MOVIE,
     });
 
-    return doFetch({ method: 'POST', data: movie })
+    return helpers
+      .doFetch({ method: 'POST', data: movie })
       .then((createdMovie) => {
         if (createdMovie.messages) {
           dispatch({
@@ -114,7 +117,8 @@ export const editMovieAction =
       type: EDIT_MOVIE,
     });
 
-    return doFetch({ method: 'PUT', data: movie })
+    return helpers
+      .doFetch({ method: 'PUT', data: movie })
       .then((updatedMovie) => {
         if (updatedMovie.messages) {
           dispatch({
@@ -143,7 +147,8 @@ export const removeMovieAction = (id: RemoveMovieAction['payload']) => (dispatch
     type: REMOVE_MOVIE,
   });
 
-  doFetch({ method: 'DELETE', params: `/${id}` })
+  return helpers
+    .doFetch({ method: 'DELETE', params: `/${id}` })
     .then(() => {
       dispatch({
         type: REMOVE_MOVIE_SUCCESS,

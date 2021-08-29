@@ -5,7 +5,7 @@ import Search from 'components/Search';
 import Button from 'components/_common/Button';
 import Logo from 'components/_common/Logo';
 import Modal from 'components/_common/Modal';
-import useOpenAndClose from 'hooks/useOpenAndClose';
+import hooks from 'hooks';
 import CreateAndEditMovie from 'components/_common/CreateAndEditMovie';
 import styles from './styles.module.scss';
 
@@ -14,7 +14,7 @@ type HomeBannerProps = {
 };
 
 const HomeBanner: React.FC<HomeBannerProps> = ({ className }) => {
-  const { isOpen, onClose, onOpen } = useOpenAndClose();
+  const { isOpen, onClose, onOpen } = hooks.useOpenAndClose();
 
   return (
     <>

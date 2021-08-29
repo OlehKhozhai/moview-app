@@ -43,6 +43,7 @@ const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
     { setSubmitting, setErrors }: FormikHelpers<Partial<Movie>>
   ) => {
     let errors = null as unknown;
+
     setSubmitting(true);
 
     if (action === 'edit' && movieId) {
@@ -50,6 +51,7 @@ const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
     } else {
       errors = await dispatch<unknown>(createMovieAction(values));
     }
+
     if (!errors) {
       onSubmit();
       setSubmitting(false);
@@ -65,7 +67,7 @@ const CreateAndEditMovie: React.FC<CreateAndEditMovieProps> = ({
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }: FormikProps<Partial<Movie>>) => (
-        <Form className={styles.root}>
+        <Form className={styles.root} data-testid="form">
           <h2 className={styles.title}>{formTitle}</h2>
 
           <Input name="title" label="Title" placeholder="Enter title" />
