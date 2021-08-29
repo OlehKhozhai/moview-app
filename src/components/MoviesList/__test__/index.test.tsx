@@ -13,7 +13,7 @@ describe('MoviesList component', () => {
   test('should render MoviesList component by default', () => {
     const component = create(
       <MemoryRouter initialEntries={['/']}>
-        <MoviesList isLoading={true} movies={[]} />
+        <MoviesList isLoading movies={[]} />
       </MemoryRouter>
     );
 

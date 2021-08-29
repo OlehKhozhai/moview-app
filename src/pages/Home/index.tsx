@@ -10,9 +10,11 @@ import { moviesSelector } from 'redux/selectors';
 import { getMoviesAction } from 'redux/actions';
 import useSearchParams from 'hooks/useSearchParams';
 
+// PATTERN: {Container component}
 const Home = () => {
   const { movies, isMoviesLoading } = useSelector(moviesSelector);
   const dispatch = useDispatch();
+  // PATTERN: {Custom hook}
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
@@ -22,6 +24,7 @@ const Home = () => {
   }, [searchParams, dispatch]);
 
   return (
+    // PATTERN: {Fragment}
     <>
       <HomeBanner />
       <Divider />

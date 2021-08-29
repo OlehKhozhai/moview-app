@@ -31,6 +31,7 @@ const MovieDetails = () => {
   }, [searchParams, dispatch]);
 
   return (
+    // PATTERN: {Fragment}
     <>
       {movieDetails && <MovieDetailsBanner movie={movieDetails} />}
       <Divider />

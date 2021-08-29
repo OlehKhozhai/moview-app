@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import rdd from 'react-router-dom';
+import * as rdd from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import hooks from 'hooks';
@@ -62,6 +62,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
   }, [value, onOpenEditMovieModal, onOpenDeleteMovieModal]);
 
   return (
+    // PATTERN: {Fragment}
     <>
       <li className={cn(styles.root, className)} onClick={handleClickOnMovie}>
         <Dropdown
@@ -73,7 +74,7 @@ const MoviesListItem: React.FC<MoviesListItemProps> = ({
           className={styles.dropdown}
         />
 
-        <img src={poster_path} alt={title} className={styles.image} />
+        <img src={poster_path} alt={title} width={330} height={495} className={styles.image} />
 
         <div className={styles.titleAndImageWrapper}>
           <h4 className={styles.title}>{title}</h4>

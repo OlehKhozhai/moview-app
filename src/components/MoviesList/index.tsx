@@ -15,9 +15,11 @@ const MoviesList: React.FC<MoviesListProps> = ({ movies, isLoading, className })
   return (
     <div className={cn(styles.root, className)}>
       {movies.length > 0 && (
+        // PATTERN: {Fragment}
         <>
           <h3 className={styles.counter}>{movies.length} movies found</h3>
 
+          {/* PATTERN: {Array as children} */}
           {movies.map((movie) => {
             return <MoviesListItem key={movie.id} {...movie} />;
           })}

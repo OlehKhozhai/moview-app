@@ -7,7 +7,7 @@ describe('Dropdown component', () => {
   test('should render Dropdown component by default', () => {
     const component = create(
       <Dropdown
-        isOpen={true}
+        isOpen
         options={['test option 1', 'test option 2']}
         onOptionClick={() => undefined}
         onClose={() => undefined}
@@ -22,7 +22,7 @@ describe('Dropdown component', () => {
     const component = create(
       <Dropdown
         value="Default value"
-        isOpen={true}
+        isOpen
         options={['test option 1', 'test option 2']}
         onOptionClick={() => undefined}
         onClose={() => undefined}
@@ -33,7 +33,7 @@ describe('Dropdown component', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  test('should render Dropdown component with isOpen value of false ', () => {
+  test('should render Dropdown component with isOpen value of false', () => {
     const component = create(
       <Dropdown
         isOpen={false}
@@ -53,7 +53,7 @@ describe('Dropdown component', () => {
     const handleOnToggle = jest.fn();
     const component = create(
       <Dropdown
-        isOpen={true}
+        isOpen
         options={['test option 1', 'test option 2']}
         onOptionClick={handleOnOptionClick}
         onClose={handleOnClose}

@@ -22,7 +22,10 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return (
         <div className={styles.root}>
           <h1 className={styles.title}>Oops, something went wrong</h1>
@@ -31,6 +34,7 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
       );
     }
 
-    return this.props.children;
+    // PATTERN: {Children types}
+    return children;
   }
 }

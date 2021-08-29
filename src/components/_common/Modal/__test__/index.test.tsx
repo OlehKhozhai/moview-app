@@ -14,17 +14,13 @@ describe('Modal component', () => {
     ReactDOM.createPortal = jest.fn((element: any) => element);
   });
 
-  beforeEach(() => {
-    body?.appendChild(modalRoot);
-  });
+  beforeEach(() => body?.appendChild(modalRoot));
 
-  afterEach(() => {
-    body?.removeChild(modalRoot);
-  });
+  afterEach(() => body?.removeChild(modalRoot));
 
   test('should render Modal component by default', () => {
     const component = create(
-      <Modal isOpen={true} onClose={() => undefined}>
+      <Modal isOpen onClose={() => undefined}>
         Modal content
       </Modal>
     );
@@ -32,7 +28,7 @@ describe('Modal component', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  test('should render Modal component with value of isOpen is false  ', () => {
+  test('should render Modal component with value of isOpen is false', () => {
     const component = create(
       <Modal isOpen={false} onClose={() => undefined}>
         Modal content
@@ -45,7 +41,7 @@ describe('Modal component', () => {
   test('should trigger onClose method', () => {
     const handleOnClose = jest.fn();
     const component = create(
-      <Modal isOpen={true} onClose={handleOnClose}>
+      <Modal isOpen onClose={handleOnClose}>
         Modal content
       </Modal>
     );

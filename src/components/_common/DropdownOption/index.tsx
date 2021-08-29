@@ -11,7 +11,10 @@ type DropdownOptionProps = {
 
 const DropdownOption: React.FC<DropdownOptionProps> = ({ option, className, onOptionClick }) => {
   const handleOptionClick = (e: React.MouseEvent) => {
-    e?.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
+
     onOptionClick(option);
   };
 

@@ -19,7 +19,7 @@ import {
 
 describe('Reducer unit testing', () => {
   describe('get movies types', () => {
-    test('GET_MOVIES ', () => {
+    test('GET_MOVIES', () => {
       expect(reducer(initialState, { type: GET_MOVIES, payload: { params: '' } })).toEqual({
         ...initialState,
         isMoviesLoading: true,
@@ -86,7 +86,7 @@ describe('Reducer unit testing', () => {
   });
 
   describe('get movie details types', () => {
-    test('GET_MOVIE_DETAILS ', () => {
+    test('GET_MOVIE_DETAILS', () => {
       expect(reducer(initialState, { type: GET_MOVIE_DETAILS, payload: 1 })).toEqual({
         ...initialState,
         error: null,
@@ -147,7 +147,7 @@ describe('Reducer unit testing', () => {
   });
 
   describe('create movie types', () => {
-    test('CREATE_MOVIE ', () => {
+    test('CREATE_MOVIE', () => {
       expect(
         reducer(initialState, {
           type: CREATE_MOVIE,
@@ -186,7 +186,7 @@ describe('Reducer unit testing', () => {
   });
 
   describe('edit movie types', () => {
-    test('EDIT_MOVIE ', () => {
+    test('EDIT_MOVIE', () => {
       expect(
         reducer(initialState, {
           type: EDIT_MOVIE,
@@ -276,7 +276,7 @@ describe('Reducer unit testing', () => {
   });
 
   describe('remove movie types', () => {
-    test('REMOVE_MOVIE ', () => {
+    test('REMOVE_MOVIE', () => {
       expect(
         reducer(initialState, {
           type: REMOVE_MOVIE,

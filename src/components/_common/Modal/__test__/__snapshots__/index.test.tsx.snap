@@ -22,4 +22,4 @@ exports[`Modal component should render Modal component by default 1`] = `
 </div>
 `;
 
-exports[`Modal component should render Modal component with value of isOpen is false   1`] = `null`;
+exports[`Modal component should render Modal component with value of isOpen is false 1`] = `null`;

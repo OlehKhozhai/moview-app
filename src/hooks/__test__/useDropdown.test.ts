@@ -8,14 +8,14 @@ describe('useDropdown hook', () => {
     const { result } = renderHook(() => useDropdown());
 
     expect(result.current.value).toEqual('');
-    expect(result.current.isDropdownVisible).toEqual(false);
+    expect(result.current.isDropdownVisible).toBeFalsy();
   });
 
   test('should return value from default value', () => {
     const { result } = renderHook(() => useDropdown({ defaultValue: 'test' }));
 
     expect(result.current.value).toEqual('test');
-    expect(result.current.isDropdownVisible).toEqual(false);
+    expect(result.current.isDropdownVisible).toBeFalsy();
   });
 
   test('should open the dropdown and click on option', () => {
@@ -25,13 +25,13 @@ describe('useDropdown hook', () => {
       result.current.onToggleDropdownVisibility();
     });
 
-    expect(result.current.isDropdownVisible).toEqual(true);
+    expect(result.current.isDropdownVisible).toBeTruthy();
 
     act(() => {
       result.current.onOptionClick('test');
     });
 
     expect(result.current.value).toEqual('test');
-    expect(result.current.isDropdownVisible).toEqual(false);
+    expect(result.current.isDropdownVisible).toBeFalsy();
   });
 });

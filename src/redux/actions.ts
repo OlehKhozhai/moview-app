@@ -94,12 +94,12 @@ export const createMovieAction =
           } as CreateMovieFailAction);
 
           return createdMovie.messages;
-        } else {
-          dispatch({
-            type: CREATE_MOVIE_SUCCESS,
-            payload: createdMovie,
-          } as CreateMovieSuccessAction);
         }
+
+        dispatch({
+          type: CREATE_MOVIE_SUCCESS,
+          payload: createdMovie,
+        } as CreateMovieSuccessAction);
       })
       .catch((error) => {
         dispatch({
@@ -127,12 +127,11 @@ export const editMovieAction =
           } as EditMovieFailAction);
 
           return updatedMovie.messages;
-        } else {
-          dispatch({
-            type: EDIT_MOVIE_SUCCESS,
-            payload: updatedMovie,
-          } as EditMovieSuccessAction);
         }
+        dispatch({
+          type: EDIT_MOVIE_SUCCESS,
+          payload: updatedMovie,
+        } as EditMovieSuccessAction);
       })
       .catch((error) => {
         dispatch({
