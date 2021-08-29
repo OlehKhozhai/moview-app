@@ -14,7 +14,7 @@ describe('MoviesNavbarTabItem component', () => {
 
   test('should render active MoviesNavbarTabItem component', () => {
     const component = create(
-      <MoviesNavbarTabItem title="test" isActive={true} onTabClick={() => undefined} />
+      <MoviesNavbarTabItem title="test" isActive onTabClick={() => undefined} />
     );
 
     expect(component.toJSON()).toMatchSnapshot();
@@ -23,7 +23,7 @@ describe('MoviesNavbarTabItem component', () => {
   test('should trigger onTabClick method', () => {
     const onTabClickStub = jest.fn();
     const component = create(
-      <MoviesNavbarTabItem title="test" isActive={true} onTabClick={onTabClickStub} />
+      <MoviesNavbarTabItem title="test" isActive onTabClick={onTabClickStub} />
     );
 
     component.root.findByType('li').props.onClick();

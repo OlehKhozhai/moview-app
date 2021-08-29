@@ -44,7 +44,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.resolve({ data: [{ id: 1 }] }));
 
-      store.dispatch<TestDispatch>(getMoviesAction({ params: '' })).then(() => {
+      return store.dispatch<TestDispatch>(getMoviesAction({ params: '' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: GET_MOVIES },
           { type: GET_MOVIES_SUCCESS, payload: [{ id: 1 }] },
@@ -55,7 +55,7 @@ describe('Actions unit testing', () => {
     test('error case', () => {
       jest.spyOn(helpers, 'doFetch').mockImplementationOnce(() => Promise.reject('Error message'));
 
-      store.dispatch<TestDispatch>(getMoviesAction({ params: '' })).then(() => {
+      return store.dispatch<TestDispatch>(getMoviesAction({ params: '' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: GET_MOVIES },
           { type: GET_MOVIES_FAIL, payload: 'Error message' },
@@ -68,7 +68,7 @@ describe('Actions unit testing', () => {
     test('success case', () => {
       jest.spyOn(helpers, 'doFetch').mockImplementationOnce(() => Promise.resolve({ id: 1 }));
 
-      store.dispatch<TestDispatch>(getMovieDetailsAction(1)).then(() => {
+      return store.dispatch<TestDispatch>(getMovieDetailsAction(1)).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: GET_MOVIE_DETAILS, payload: 1 },
           { type: GET_MOVIE_DETAILS_SUCCESS, payload: { id: 1 } },
@@ -79,7 +79,7 @@ describe('Actions unit testing', () => {
     test('error case', () => {
       jest.spyOn(helpers, 'doFetch').mockImplementationOnce(() => Promise.reject('Error message'));
 
-      store.dispatch<TestDispatch>(getMovieDetailsAction(1)).then(() => {
+      return store.dispatch<TestDispatch>(getMovieDetailsAction(1)).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: GET_MOVIE_DETAILS, payload: 1 },
           { type: GET_MOVIE_DETAILS_FAIL, payload: 'Error message' },
@@ -102,7 +102,7 @@ describe('Actions unit testing', () => {
         })
       );
 
-      store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: CREATE_MOVIE },
           {
@@ -126,7 +126,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.reject('Error message 1'));
 
-      store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: CREATE_MOVIE },
           { type: CREATE_MOVIE_FAIL, payload: 'Error message 1' },
@@ -139,7 +139,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.resolve({ messages: 'Error message 2' }));
 
-      store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(createMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: CREATE_MOVIE },
           { type: CREATE_MOVIE_FAIL, payload: 'Error message 2' },
@@ -154,7 +154,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.resolve({ title: 'Movie 1' }));
 
-      store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: EDIT_MOVIE },
           { type: EDIT_MOVIE_SUCCESS, payload: { title: 'Movie 1' } },
@@ -167,7 +167,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.reject('Error message 1'));
 
-      store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: EDIT_MOVIE },
           { type: EDIT_MOVIE_FAIL, payload: 'Error message 1' },
@@ -180,7 +180,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.resolve({ messages: 'Error message 2' }));
 
-      store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
+      return store.dispatch<TestDispatch>(editMovieAction({ title: 'Movie 1' })).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: EDIT_MOVIE },
           { type: EDIT_MOVIE_FAIL, payload: 'Error message 2' },
@@ -195,7 +195,7 @@ describe('Actions unit testing', () => {
         .spyOn(helpers, 'doFetch')
         .mockImplementationOnce(() => Promise.resolve({ title: 'Movie 1' }));
 
-      store.dispatch<TestDispatch>(removeMovieAction(1)).then(() => {
+      return store.dispatch<TestDispatch>(removeMovieAction(1)).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: REMOVE_MOVIE },
           { type: REMOVE_MOVIE_SUCCESS },
@@ -206,7 +206,7 @@ describe('Actions unit testing', () => {
     test('error case', () => {
       jest.spyOn(helpers, 'doFetch').mockImplementationOnce(() => Promise.reject('Error message'));
 
-      store.dispatch<TestDispatch>(removeMovieAction(1)).then(() => {
+      return store.dispatch<TestDispatch>(removeMovieAction(1)).then(() => {
         expect(store.getActions()).toStrictEqual([
           { type: REMOVE_MOVIE },
           { type: REMOVE_MOVIE_FAIL, payload: 'Error message' },

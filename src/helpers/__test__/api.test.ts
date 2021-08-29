@@ -10,7 +10,7 @@ global.fetch = jest.fn(
 
 describe('api unit testing', () => {
   test('doFetch', () => {
-    doFetch({}).then((data) => {
+    return doFetch({}).then((data) => {
       expect(data).toBe('test data');
     });
   });

@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { create } from 'react-test-renderer';
 
-import App from './../index';
+import App from '../index';
 
 describe('App component', () => {
   test('should render App component by default on home page', () => {

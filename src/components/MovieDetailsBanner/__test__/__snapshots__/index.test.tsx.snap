@@ -34,8 +34,11 @@ exports[`MovieDetailsBanner component should render MovieDetailsBanner component
       className="imageWrapper"
     >
       <img
+        alt="poster"
         className="image"
+        height={420}
         src="https://via.placeholder.com/330x450"
+        width={280}
       />
     </div>
     <div>

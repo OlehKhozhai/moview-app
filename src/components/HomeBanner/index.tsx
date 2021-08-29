@@ -17,6 +17,7 @@ const HomeBanner: React.FC<HomeBannerProps> = ({ className }) => {
   const { isOpen, onClose, onOpen } = hooks.useOpenAndClose();
 
   return (
+    // PATTERN: {Fragment}
     <>
       <div className={cn(styles.root, className)}>
         <div className={styles.header}>

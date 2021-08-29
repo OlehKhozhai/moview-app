@@ -37,7 +37,9 @@ exports[`MoviesList component should render MoviesList component with movies 1`]
     <img
       alt="Movie 1"
       className="image"
+      height={495}
       src="https://via.placeholder.com/330x450"
+      width={330}
     />
     <div
       className="titleAndImageWrapper"
@@ -80,7 +82,9 @@ exports[`MoviesList component should render MoviesList component with movies 1`]
     <img
       alt="Movie 1"
       className="image"
+      height={495}
       src="https://via.placeholder.com/330x450"
+      width={330}
     />
     <div
       className="titleAndImageWrapper"

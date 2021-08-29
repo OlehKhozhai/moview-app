@@ -3,8 +3,8 @@ import cn from 'classnames';
 
 import Button from 'components/_common/Button';
 import Logo from 'components/_common/Logo';
-import styles from './styles.module.scss';
 import { Movie } from 'redux/types';
+import styles from './styles.module.scss';
 
 type MovieDetailsBannerProps = {
   movie: Movie;
@@ -21,7 +21,13 @@ const MovieDetailsBanner: React.FC<MovieDetailsBannerProps> = ({ movie, classNam
 
       <div className={styles.content}>
         <div className={styles.imageWrapper}>
-          <img className={styles.image} src={movie.poster_path} />
+          <img
+            className={styles.image}
+            alt="poster"
+            width={280}
+            height={420}
+            src={movie.poster_path}
+          />
         </div>
 
         <div>

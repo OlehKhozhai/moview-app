@@ -18,7 +18,9 @@ exports[`MoviesListItem component should render MoviesListItem component by defa
   <img
     alt="Movie 1"
     className="image"
+    height={495}
     src="https://via.placeholder.com/330x450"
+    width={330}
   />
   <div
     className="titleAndImageWrapper"

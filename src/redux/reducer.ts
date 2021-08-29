@@ -13,8 +13,10 @@ import {
   REMOVE_MOVIE,
   REMOVE_MOVIE_SUCCESS,
   REMOVE_MOVIE_FAIL,
+  ActionTypes,
+  GET_MOVIES,
+  RootReducer,
 } from './types';
-import { ActionTypes, GET_MOVIES, RootReducer } from 'redux/types';
 
 export const initialState: RootReducer = {
   movies: [],
