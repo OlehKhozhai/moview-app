@@ -10,10 +10,10 @@ describe('Selectors unit testing', () => {
   });
 
   test('errorSelector', () => {
-    expect(errorSelector(initialState)).toEqual(null);
+    expect(errorSelector(initialState)).toBeNull();
   });
 
   test('movieDetailsSelector', () => {
-    expect(movieDetailsSelector(initialState)).toBe(null);
+    expect(movieDetailsSelector(initialState)).toBeNull();
   });
 });

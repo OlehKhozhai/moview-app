@@ -7,7 +7,7 @@ describe('useOpenAndClose hook', () => {
   test('should return default values', () => {
     const { result } = renderHook(() => useOpenAndClose());
 
-    expect(result.current.isOpen).toEqual(false);
+    expect(result.current.isOpen).toBeFalsy();
   });
 
   test('should return isOpen true after triggering onOpen function', () => {
@@ -17,7 +17,7 @@ describe('useOpenAndClose hook', () => {
       result.current.onOpen();
     });
 
-    expect(result.current.isOpen).toEqual(true);
+    expect(result.current.isOpen).toBeTruthy();
   });
 
   test('should return isOpen true after triggering onToggle function', () => {
@@ -27,7 +27,7 @@ describe('useOpenAndClose hook', () => {
       result.current.onToggle();
     });
 
-    expect(result.current.isOpen).toEqual(true);
+    expect(result.current.isOpen).toBeTruthy();
   });
 
   test('should return isOpen false after triggering onClose function', () => {
@@ -38,6 +38,6 @@ describe('useOpenAndClose hook', () => {
       result.current.onClose();
     });
 
-    expect(result.current.isOpen).toEqual(false);
+    expect(result.current.isOpen).toBeFalsy();
   });
 });
